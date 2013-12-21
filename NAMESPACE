@@ -1,5 +1,3 @@
 exportPattern("^[^\\.]")
 export(stacf)
 export(stpacf)
-import(base)
-
