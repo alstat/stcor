@@ -9,3 +9,4 @@ Authors@R: c(
   ))
 Maintainer: Al-Ahmadgaid Bahauddin Asaad <alstated@gmail.com>
 Description: Correlograms of Space-Time Autoregressive Integrated Moving Average
+License: MSU-IIT
