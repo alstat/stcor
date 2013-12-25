@@ -1,5 +1,3 @@
 useDynLib(stcor)
 export(stacf)
 export(stpacf)
-export(stacf1)
-export(stacf2)
