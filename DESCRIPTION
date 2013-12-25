@@ -1,8 +1,8 @@
 Package: stcor
 Type: Package
 Title: Correlograms of Space-Time ARIMA
-Version: 1.0
-Date: 2013-12-21
+Version: 0.6.2
+Date: 2013-12-25
 Authors@R: c(
   person("Al-Ahmadgaid", "Asaad", email = "alstated@gmail.com", 
     role = c("aut", "cre")
