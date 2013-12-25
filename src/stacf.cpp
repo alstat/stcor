@@ -19,3 +19,19 @@ double stacf1(NumericMatrix x, int timelag){
     }
     return sum;
     }
+    
+// [[Rcpp::export]]
+double stacf2(NumericMatrix x, NumericMatrix y, int timelag){
+    int i, j, t, nrow = x.nrow(), ncol = x.ncol();
+    double sum = 0.0;
+    
+    for (i = 0; i < nrow; ++i){
+      for (j = 0; j < nrow; ++j){
+        for(t = 0; t < (ncol - timelag); ++t){
+          sum = sum + y(i, j) * x(j, t) * x(i, (t + timelag));
+        }
+      }
+    }
+    return sum;
+    }
+    
