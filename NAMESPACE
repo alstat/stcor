@@ -1,3 +1,2 @@
-exportPattern("^[^\\.]")
-export(stacf)
-export(stpacf)
+useDynLib(stcor)
+exportPattern("^[[:alpha:]]+")
