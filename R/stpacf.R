@@ -7,7 +7,7 @@ stpacf <- function(data, max.timelag, wmatrices = list(...)){
   i.max = 0
   for(j in 1:max.timelag){
     for(i in 1:length(wmatrices)){
-      a.mat[i + i.max, ] <- stacovf(data, wmatrix1 = wmatrices[[i]], timelag = j)
+      a.mat[i + i.max, ] <- stacovfC(data, wmatrix1 = wmatrices[[i]], timelag = j)
     }
     i.max = i * j
   }
@@ -17,7 +17,7 @@ stpacf <- function(data, max.timelag, wmatrices = list(...)){
     for(k in 1:length(wmatrices)){
       for(j in 1:max.timelag){
         for(i in 1:length(wmatrices)){
-          b.mat[i + i.max, k + k.max] <- stacovf(data, wmatrix1 = wmatrices[[i]], wmatrix2 = wmatrices[[k]], timelag = j - l)
+          b.mat[i + i.max, k + k.max] <- stacovfCPP(data, wmatrix1 = wmatrices[[i]], wmatrix2 = wmatrices[[k]], timelag = j - l)
         }
         i.max = i * j
       }
