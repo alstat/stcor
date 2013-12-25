@@ -1,7 +1,7 @@
 Package: stcor
 Type: Package
 Title: Correlograms of Space-Time ARIMA
-Version: 0.0.1
+Version: 1.0
 Date: 2013-12-21
 Authors@R: c(
   person("Al-Ahmadgaid", "Asaad", email = "alstated@gmail.com", 
@@ -10,3 +10,5 @@ Authors@R: c(
 Maintainer: Al-Ahmadgaid Bahauddin Asaad <alstated@gmail.com>
 Description: Correlograms of Space-Time Autoregressive Integrated Moving Average
 License: GNU Affero General Public License
+Depends: Rcpp (>= 0.10.6)
+LinkingTo: Rcpp
