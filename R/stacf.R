@@ -1,4 +1,4 @@
-stacfC <- function(data, max.timelag, wmatrices = list(...)){
+stacf <- function(data, max.timelag, wmatrices = list(...)){
   stacf.tab <- matrix(NA, nrow = max.timelag, ncol = length(wmatrices))
   
   for(j in 1:length(wmatrices)){
