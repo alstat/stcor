@@ -1,2 +1,4 @@
 useDynLib(stcor)
-exportPattern("^[[:alpha:]]+")
+export(centralize)
+export(stacf)
+export(stpacf)
