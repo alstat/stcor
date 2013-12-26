@@ -1,7 +1,11 @@
 stacovfCPP <- function(data, 
-                    wmatrix1 = NULL, 
-                    wmatrix2 = NULL, 
-                    timelag = 1){
+                       wmatrix1 = NULL, 
+                       wmatrix2 = NULL, 
+                       timelag = 1){
+  if(!is.data.frame(data))
+    stop("data should be data.frame class")
+  if(is.data.frame(data))
+    data = t(as.matrix(data))
   a = dim(data)[1]
   b = dim(data)[2]
   sumn <- 0
