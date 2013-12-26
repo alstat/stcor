@@ -1,6 +1,6 @@
 stacfCPP <- function(data, 
-                      wmatrix = NULL,
-                      timelag = 1){
+                     wmatrix = NULL,
+                     timelag = 1){
   if(!is.data.frame(data))
     stop("data should be data.frame class")
   if(is.data.frame(data))
