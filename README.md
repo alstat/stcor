@@ -1,7 +1,7 @@
 Space-Time Correlograms
 =====
 
-Package for correlograms of advanced time series model, the Space-Time Autoregressive Integrated Moving Average (STARIMA).
+An R package for correlograms of advanced time series model, the Space-Time Autoregressive Integrated Moving Average (STARIMA).
 
 Details
 -----
