@@ -15,7 +15,7 @@ if (!require("devtools"))
 devtools::install_github("stcor", "alstat")
 ```
 
-Author
+Author/Maintainer
 -----
 Al-Ahmadgaid Asaad (alstated@gmail.com)
 
