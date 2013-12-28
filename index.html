@@ -39,38 +39,88 @@
         <ul></ul>
       </nav>
       <section>
-        <h3>
-<a name="description" class="anchor" href="#description"><span class="octicon octicon-link"></span></a>Description</h3>
+        <h1>
+<a name="description" class="anchor" href="#description"><span class="octicon octicon-link"></span></a>Description</h1>
 
-<p>An R package for correlograms of advanced time series model, the Space-Time Autoregressive Integrated Moving Average (STARIMA).</p>
+<p>The <code>stcor</code> package provides functions for correlograms of the advanced time series model, the Space-Time Autoregressive Integrated Moving Average (STARIMA). These functions are the Space-Time Autocorrelation Function (<code>stacf</code>) and Space-Time Partial Autocorrelation Function (<code>stpacf</code>). Including function for centralizing (<code>stcenter</code>) the data to its mean.</p>
 
-<h3>
-<a name="details" class="anchor" href="#details"><span class="octicon octicon-link"></span></a>Details</h3>
-
-<p>This package contains functions for identifying models from STARIMA family, and these are the Space-Time Autocorrelation Function (<code>stacf</code>) and Space-Time Partial Autocorrelation Function (<code>stpacf</code>). Including function for centralizing (<code>centralize</code>) the data to its mean.</p>
-
-<h3>
-<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h3>
+<h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
 
 <div class="highlight highlight-coffee"><pre><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">require</span><span class="p">(</span><span class="s">"devtools"</span><span class="p">))</span>
   <span class="nx">install</span><span class="p">.</span><span class="nx">packages</span><span class="p">(</span><span class="s">"devtools"</span><span class="p">)</span>
 <span class="nx">devtools</span><span class="o">::</span><span class="nx">install_github</span><span class="p">(</span><span class="s">"stcor"</span><span class="p">,</span> <span class="s">"alstat"</span><span class="p">)</span>
 </pre></div>
 
-<h3>
-<a name="authormaintainer" class="anchor" href="#authormaintainer"><span class="octicon octicon-link"></span></a>Author/Maintainer</h3>
+<hr><h2>
+<a name="vignette" class="anchor" href="#vignette"><span class="octicon octicon-link"></span></a>Vignette</h2>
 
-<p>Al-Ahmadgaid Asaad (<a href="mailto:alstated@gmail.com">alstated@gmail.com</a>)</p>
+<p>To start with, let us simulate a space-time series. Assuming there are seven (7) spatial locations with 200 observation. Then we have,</p>
 
-<h3>
-<a name="note" class="anchor" href="#note"><span class="octicon octicon-link"></span></a>Note</h3>
+<div class="highlight highlight-coffee"><pre><span class="nx">series</span> <span class="o">&lt;-</span> <span class="nx">arima</span><span class="p">.</span><span class="nx">sim</span><span class="p">(</span><span class="nx">list</span><span class="p">(</span><span class="nv">order = </span><span class="nx">c</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span>
+                    <span class="nv">ar = </span><span class="nx">c</span><span class="p">(</span><span class="mf">0.7</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">)),</span> <span class="nv">n = </span><span class="mi">155</span><span class="p">)</span>
 
-<p>This project is underconstruction!</p>
+<span class="nx">location1</span> <span class="o">&lt;-</span> <span class="nx">series</span> <span class="o">+</span> <span class="nx">rnorm</span><span class="p">(</span><span class="nx">length</span><span class="p">(</span><span class="nx">series</span><span class="p">))</span>
+<span class="nx">location2</span> <span class="o">&lt;-</span> <span class="nx">series</span> <span class="o">+</span> <span class="nx">rnorm</span><span class="p">(</span><span class="nx">length</span><span class="p">(</span><span class="nx">series</span><span class="p">))</span>
+<span class="nx">location3</span> <span class="o">&lt;-</span> <span class="nx">series</span> <span class="o">+</span> <span class="nx">rnorm</span><span class="p">(</span><span class="nx">length</span><span class="p">(</span><span class="nx">series</span><span class="p">))</span>
+<span class="nx">location4</span> <span class="o">&lt;-</span> <span class="nx">series</span> <span class="o">+</span> <span class="nx">rnorm</span><span class="p">(</span><span class="nx">length</span><span class="p">(</span><span class="nx">series</span><span class="p">))</span>
+<span class="nx">location5</span> <span class="o">&lt;-</span> <span class="nx">series</span> <span class="o">+</span> <span class="nx">rnorm</span><span class="p">(</span><span class="nx">length</span><span class="p">(</span><span class="nx">series</span><span class="p">))</span>
+<span class="nx">location6</span> <span class="o">&lt;-</span> <span class="nx">series</span> <span class="o">+</span> <span class="nx">rnorm</span><span class="p">(</span><span class="nx">length</span><span class="p">(</span><span class="nx">series</span><span class="p">))</span>
+<span class="nx">location7</span> <span class="o">&lt;-</span> <span class="nx">series</span> <span class="o">+</span> <span class="nx">rnorm</span><span class="p">(</span><span class="nx">length</span><span class="p">(</span><span class="nx">series</span><span class="p">))</span>
+</pre></div>
 
-<hr><h3>
-<a name="vignette" class="anchor" href="#vignette"><span class="octicon octicon-link"></span></a>Vignette</h3>
+<p>Now we will merge this into a data frame object,</p>
 
-<p>This is the section of the vignette.</p>
+<div class="highlight highlight-coffee"><pre><span class="nx">series</span><span class="p">.</span><span class="nx">df</span> <span class="o">&lt;-</span> <span class="nx">data</span><span class="p">.</span><span class="nx">frame</span><span class="p">(</span><span class="nx">location1</span><span class="p">,</span> <span class="nx">location2</span><span class="p">,</span> <span class="nx">location3</span><span class="p">,</span>
+                        <span class="nx">location4</span><span class="p">,</span> <span class="nx">location5</span><span class="p">,</span> <span class="nx">location6</span><span class="p">,</span>
+                        <span class="nx">location7</span><span class="p">)</span>
+</pre></div>
+
+<p>And it is required to centralize the data to its mean,</p>
+
+<div class="highlight highlight-coffee"><pre><span class="nx">series</span><span class="p">.</span><span class="nx">df</span> <span class="o">&lt;-</span> <span class="nx">stcenter</span><span class="p">(</span><span class="nx">series</span><span class="p">.</span><span class="nx">df</span><span class="p">)</span>
+</pre></div>
+
+<p>Then assuming the spatial neighbourhood of our data has the following weights matrices,</p>
+
+<ul>
+<li>Weights matrix for first spatial order</li>
+</ul><div class="highlight highlight-coffee"><pre><span class="nx">W1</span> <span class="o">&lt;-</span> <span class="nx">rbind</span><span class="p">(</span><span class="nx">c</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span>
+            <span class="nx">c</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span>
+            <span class="nx">c</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span>
+            <span class="nx">c</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span>
+            <span class="nx">c</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span>
+            <span class="nx">c</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="mi">4</span><span class="p">),</span>
+            <span class="nx">c</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+</pre></div>
+
+<ul>
+<li>Weights matrix for second spatial order</li>
+</ul><div class="highlight highlight-coffee"><pre><span class="nx">W2</span> <span class="o">&lt;-</span> <span class="nx">rbind</span><span class="p">(</span><span class="nx">c</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">),</span>
+            <span class="nx">c</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span>
+            <span class="nx">c</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span>
+            <span class="nx">c</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">),</span>
+            <span class="nx">c</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span>
+            <span class="nx">c</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span>
+            <span class="nx">c</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+</pre></div>
+
+<ul>
+<li>Weights matrix for third spatial order</li>
+</ul><div class="highlight highlight-coffee"><pre><span class="nx">W3</span> <span class="o">&lt;-</span> <span class="nx">rbind</span><span class="p">(</span><span class="nx">c</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span>
+            <span class="nx">c</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">),</span>
+            <span class="nx">c</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span>
+            <span class="nx">c</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span>
+            <span class="nx">c</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span>
+            <span class="nx">c</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span>
+            <span class="nx">c</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+</pre></div>
+
+<p>Finally we compute the STACF and STPACF</p>
+
+<div class="highlight highlight-coffee"><pre><span class="nx">stacf</span><span class="p">(</span><span class="nv">data = </span><span class="nx">series</span><span class="p">.</span><span class="nx">df</span><span class="p">,</span> <span class="nv">wmatrices = </span><span class="nx">list</span><span class="p">(</span><span class="nx">NULL</span><span class="p">,</span> <span class="nx">W1</span><span class="p">,</span> <span class="nx">W2</span><span class="p">,</span> <span class="nx">W3</span><span class="p">))</span>
+<span class="nx">stpacf</span><span class="p">(</span><span class="nv">data = </span><span class="nx">series</span><span class="p">.</span><span class="nx">df</span><span class="p">,</span> <span class="nv">wmatrices = </span><span class="nx">list</span><span class="p">(</span><span class="nx">NULL</span><span class="p">,</span> <span class="nx">W1</span><span class="p">,</span> <span class="nx">W2</span><span class="p">,</span> <span class="nx">W3</span><span class="p">))</span>
+</pre></div>
       </section>
       <footer>
         <p>Project maintained by <a href="https://github.com/alstat">alstat</a></p>
