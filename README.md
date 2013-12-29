@@ -1,11 +1,8 @@
 Space-Time Correlograms
 =====
 
-An R package for correlograms of advanced time series model, the Space-Time Autoregressive Integrated Moving Average (STARIMA).
+The stcor package provides functions for correlograms of the advanced time series model, the Space-Time Autoregressive Integrated Moving Average (STARIMA). These functions are the Space-Time Autocorrelation Function (`stacf`) and Space-Time Partial Autocorrelation Function (`stpacf`). Including function for centralizing (`stcenter`) the data to its mean.
 
-Details
------
-This package contains functions for identifying models from STARIMA family, and these are the Space-Time Autocorrelation Function (`stacf`) and Space-Time Partial Autocorrelation Function (`stpacf`). Including function for centralizing (`centralize`) the data to its mean.
 
 Installation
 -----
