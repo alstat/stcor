@@ -120,6 +120,10 @@
 <span class="p">[</span><span class="mi">15</span><span class="p">,]</span>    <span class="o">-</span><span class="mf">0.4451392</span>   <span class="o">-</span><span class="mf">0.05345622</span>    <span class="mf">0.01595775</span>    <span class="o">-</span><span class="mf">0.3003420</span>
 </pre></div>
 
+<center>
+  <img src = "http://ubuntuone.com/7R7qs0RBe5uTVbzl42TiNn" alt = "STACF">
+</center>
+
 <div class="highlight highlight-coffee"><pre><span class="nx">stpacf</span><span class="p">(</span><span class="nv">data = </span><span class="nx">palay</span><span class="p">.</span><span class="nx">cen</span><span class="p">,</span> <span class="nv">wmatrices = </span><span class="nx">list</span><span class="p">(</span><span class="nx">NULL</span><span class="p">,</span> <span class="nx">W1</span><span class="p">,</span> <span class="nx">W2</span><span class="p">,</span> <span class="nx">W3</span><span class="p">))</span>
 </pre></div>
 
@@ -140,6 +144,11 @@
 <span class="p">[</span><span class="mi">14</span><span class="p">,]</span>    <span class="mf">0.02187674</span>   <span class="mf">0.078717882</span>   <span class="mf">0.012064031</span>    <span class="mf">0.18609974</span>
 <span class="p">[</span><span class="mi">15</span><span class="p">,]</span>   <span class="o">-</span><span class="mf">0.08605871</span>  <span class="o">-</span><span class="mf">0.071585168</span>  <span class="o">-</span><span class="mf">0.105247384</span>   <span class="o">-</span><span class="mf">0.13500443</span>
 </pre></div>
+
+<center>
+  <img src = "http://ubuntuone.com/76vaf28tUczzbV8xdSrqlv" alt = "STPACF">
+</center>
+
 
 <p>Our findings is that, the STACF is not decaying both temporally and spatially, this is clearly due to the fact that the data is seasonal in nature. Hence, we need to take the first order seasonal differencing,</p>
 
@@ -169,6 +178,10 @@
 <span class="p">[</span><span class="mi">15</span><span class="p">,]</span>   <span class="mf">0.125114476</span>   <span class="mf">0.006045925</span>  <span class="mf">0.0082689696</span>   <span class="mf">0.010564056</span>
 </pre></div>
 
+<center>
+  <img src = "http://ubuntuone.com/3qUitIzaKm8yOQdpx0yzPn" alt = "Differenced STACF">
+</center>
+
 <div class="highlight highlight-coffee"><pre><span class="nx">stpacf</span><span class="p">(</span><span class="nx">palay</span><span class="p">.</span><span class="nx">dif</span><span class="p">,</span> <span class="nv">wmatrices = </span><span class="nx">list</span><span class="p">(</span><span class="nx">NULL</span><span class="p">,</span> <span class="nx">W1</span><span class="p">,</span> <span class="nx">W2</span><span class="p">,</span> <span class="nx">W3</span><span class="p">))</span>
 </pre></div>
 
@@ -190,10 +203,14 @@
 <span class="p">[</span><span class="mi">15</span><span class="p">,]</span>   <span class="mf">0.082998896</span>   <span class="mf">0.051000150</span>  <span class="mf">0.0088268281</span>   <span class="mf">0.068168052</span>
 </pre></div>
 
+<center>
+  <img src = "http://ubuntuone.com/79QMt0JIa7TNHAIT3vszLp" alt = "Differenced STPACF">
+</center>
+
 <p>The findings suggest that the space-time ACF decays both in time and space; and the space-time PACF is significant in time lag 2 and 4, at spatial lag 0. Our tentative model therefore, would either be Seasonal STARIMA(2_0,0,0)(0,1,0)<em>4 or Seasonal STARIMA(4</em>0,0,0)(0,1,0)_4.</p>
       </section>
       <footer>
-        <p>Project maintained by <a href="https://github.com/alstat">alstat</a></p>
+        <p>Project maintained by <a href="https://github.com/alstat">Al-Ahmadgaid Asaad</a></p>
         <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></small></p>
       </footer>
     </div>
