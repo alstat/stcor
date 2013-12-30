@@ -1,20 +1,6 @@
 <!doctype html>
 <html>
   <head>
-  <script src='http://cdn.mathjax.org/mathjax/latest/MathJax.js' type='text/javascript'>    
-    MathJax.Hub.Config({
-        HTML: ["input/TeX","output/HTML-CSS"],
-        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
-               equationNumbers: { autoNumber: "AMS" } },
-        extensions: ["tex2jax.js"],
-        jax: ["input/TeX","output/HTML-CSS"],
-        tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-                   displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-                   processEscapes: true },
-        "HTML-CSS": { availableFonts: ["TeX"],
-                      linebreaks: { automatic: true } }
-    });
-</script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>stcor: Correlograms of Space-Time ARIMA by alstat</title>
@@ -53,13 +39,15 @@
         <ul></ul>
       </nav>
       <section>
-        <h2>
-<a name="description" class="anchor" href="#description"><span class="octicon octicon-link"></span></a>Description</h2>
+        <h1>
+<a name="description" class="anchor" href="#description"><span class="octicon octicon-link"></span></a>Description</h1>
 
 <p>The <code>stcor</code> package provides functions for correlograms of the advanced time series model, the Space-Time Autoregressive Integrated Moving Average (STARIMA). These functions are the Space-Time Autocorrelation Function (<code>stacf</code>) and Space-Time Partial Autocorrelation Function (<code>stpacf</code>). Including function for centralizing (<code>stcenter</code>) the data to its mean.</p>
 
 <h2>
 <a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<p>This package is not yet on CRAN, and still under development on <strong>github</strong>. Run the following for latest development:</p>
 
 <div class="highlight highlight-coffee"><pre><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">require</span><span class="p">(</span><span class="s">"devtools"</span><span class="p">))</span>
   <span class="nx">install</span><span class="p">.</span><span class="nx">packages</span><span class="p">(</span><span class="s">"devtools"</span><span class="p">)</span>
@@ -69,7 +57,7 @@
 <hr><h2>
 <a name="vignette" class="anchor" href="#vignette"><span class="octicon octicon-link"></span></a>Vignette</h2>
 
-<p>The package contains dataset named <code>palay</code> which is the volume of rice production from Cordillera Administrative Region (CAR) of the Philippines. Run <code>?palay</code> to get more details on the data. The data has 6 regions that can be assigned into the following weights matrices using the equal weighting of spatial order:</p>
+<p>The package contains dataset named <code>palay</code> which is the volume of the rice production from the Cordillera Administrative Region (CAR) of the Philippines. Run <code>?palay</code> to get more details about the data. There are 6 regions in the dataset that can be assigned into the following weights matrices using the equal weighting of spatial order.</p>
 
 <ul>
 <li>First spatial order weights matrix</li>
@@ -101,7 +89,7 @@
             <span class="nx">c</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
 </pre></div>
 
-<p>It is required to centralize the data to its mean for STARIMA modeling, but before doing so, the Year column of the data must be removed since we do not have to centralize this,</p>
+<p>It is required to centralize the data to its mean for STARIMA modeling, but before doing so, the Year column must be removed since we do not have to centralize this,</p>
 
 <div class="highlight highlight-coffee"><pre><span class="nx">palay1</span> <span class="o">&lt;-</span> <span class="nx">subset</span><span class="p">(</span><span class="nx">palay</span><span class="p">,</span> <span class="nv">select = </span><span class="o">-</span><span class="nx">c</span><span class="p">(</span><span class="nx">Year</span><span class="p">))</span>
 </pre></div>
@@ -117,114 +105,97 @@
 </pre></div>
 
 <div class="highlight highlight-coffee"><pre>      <span class="nx">Spatial</span> <span class="nx">Lag</span> <span class="mi">0</span> <span class="nx">Spatial</span> <span class="nx">Lag</span> <span class="mi">1</span> <span class="nx">Spatial</span> <span class="nx">Lag</span> <span class="mi">2</span> <span class="nx">Spatial</span> <span class="nx">Lag</span> <span class="mi">3</span>
- <span class="p">[</span><span class="mi">1</span><span class="p">,]</span>    <span class="o">-</span><span class="mf">0.4992931</span>   <span class="o">-</span><span class="mf">0.06020914</span>    <span class="mf">0.04832691</span>    <span class="o">-</span><span class="mf">0.3430217</span>
- <span class="p">[</span><span class="mi">2</span><span class="p">,]</span>     <span class="mf">0.6379861</span>    <span class="mf">0.20788167</span>    <span class="mf">0.01852023</span>     <span class="mf">0.5425648</span>
- <span class="p">[</span><span class="mi">3</span><span class="p">,]</span>    <span class="o">-</span><span class="mf">0.4907843</span>   <span class="o">-</span><span class="mf">0.04705116</span>    <span class="mf">0.05408208</span>    <span class="o">-</span><span class="mf">0.3232515</span>
- <span class="p">[</span><span class="mi">4</span><span class="p">,]</span>     <span class="mf">0.9050261</span>    <span class="mf">0.22643810</span>    <span class="mf">0.09852541</span>     <span class="mf">0.5408789</span>
- <span class="p">[</span><span class="mi">5</span><span class="p">,]</span>    <span class="o">-</span><span class="mf">0.4804457</span>   <span class="o">-</span><span class="mf">0.06815819</span>    <span class="mf">0.03351860</span>    <span class="o">-</span><span class="mf">0.3393500</span>
- <span class="p">[</span><span class="mi">6</span><span class="p">,]</span>     <span class="mf">0.5895664</span>    <span class="mf">0.19035135</span>    <span class="mf">0.02051211</span>     <span class="mf">0.5013397</span>
- <span class="p">[</span><span class="mi">7</span><span class="p">,]</span>    <span class="o">-</span><span class="mf">0.4769501</span>   <span class="o">-</span><span class="mf">0.05071062</span>    <span class="mf">0.04101118</span>    <span class="o">-</span><span class="mf">0.3148463</span>
- <span class="p">[</span><span class="mi">8</span><span class="p">,]</span>     <span class="mf">0.8321032</span>    <span class="mf">0.20616214</span>    <span class="mf">0.09358343</span>     <span class="mf">0.5060509</span>
- <span class="p">[</span><span class="mi">9</span><span class="p">,]</span>    <span class="o">-</span><span class="mf">0.4626080</span>   <span class="o">-</span><span class="mf">0.07369541</span>    <span class="mf">0.01984861</span>    <span class="o">-</span><span class="mf">0.3334944</span>
-<span class="p">[</span><span class="mi">10</span><span class="p">,]</span>     <span class="mf">0.5400462</span>    <span class="mf">0.17108183</span>    <span class="mf">0.01750341</span>     <span class="mf">0.4589079</span>
-<span class="p">[</span><span class="mi">11</span><span class="p">,]</span>    <span class="o">-</span><span class="mf">0.4607559</span>   <span class="o">-</span><span class="mf">0.05103261</span>    <span class="mf">0.02807154</span>    <span class="o">-</span><span class="mf">0.3049772</span>
-<span class="p">[</span><span class="mi">12</span><span class="p">,]</span>     <span class="mf">0.7589304</span>    <span class="mf">0.18527446</span>    <span class="mf">0.08967877</span>     <span class="mf">0.4730669</span>
-<span class="p">[</span><span class="mi">13</span><span class="p">,]</span>    <span class="o">-</span><span class="mf">0.4446532</span>   <span class="o">-</span><span class="mf">0.08055303</span>    <span class="mf">0.00526782</span>    <span class="o">-</span><span class="mf">0.3257589</span>
-<span class="p">[</span><span class="mi">14</span><span class="p">,]</span>     <span class="mf">0.5030049</span>    <span class="mf">0.15949289</span>    <span class="mf">0.01989247</span>     <span class="mf">0.4360190</span>
-<span class="p">[</span><span class="mi">15</span><span class="p">,]</span>    <span class="o">-</span><span class="mf">0.4451392</span>   <span class="o">-</span><span class="mf">0.05345622</span>    <span class="mf">0.01595775</span>    <span class="o">-</span><span class="mf">0.3003420</span>
+ <span class="p">[</span><span class="mi">1</span><span class="p">,]</span>    <span class="o">-</span><span class="mf">0.4992931</span>    <span class="o">-</span><span class="mf">0.3768003</span>   <span class="mf">0.103059733</span>    <span class="mf">0.07686560</span>
+ <span class="p">[</span><span class="mi">2</span><span class="p">,]</span>     <span class="mf">0.6379861</span>     <span class="mf">0.6286114</span>   <span class="mf">0.013944315</span>   <span class="o">-</span><span class="mf">0.02638101</span>
+ <span class="p">[</span><span class="mi">3</span><span class="p">,]</span>    <span class="o">-</span><span class="mf">0.4907843</span>    <span class="o">-</span><span class="mf">0.3636884</span>   <span class="mf">0.046419684</span>    <span class="mf">0.07925981</span>
+ <span class="p">[</span><span class="mi">4</span><span class="p">,]</span>     <span class="mf">0.9050261</span>     <span class="mf">0.5807629</span>   <span class="mf">0.019897096</span>    <span class="mf">0.09256568</span>
+ <span class="p">[</span><span class="mi">5</span><span class="p">,]</span>    <span class="o">-</span><span class="mf">0.4804457</span>    <span class="o">-</span><span class="mf">0.3743855</span>   <span class="mf">0.094946729</span>    <span class="mf">0.06465131</span>
+ <span class="p">[</span><span class="mi">6</span><span class="p">,]</span>     <span class="mf">0.5895664</span>     <span class="mf">0.5862548</span>   <span class="mf">0.007210034</span>   <span class="o">-</span><span class="mf">0.02778151</span>
+ <span class="p">[</span><span class="mi">7</span><span class="p">,]</span>    <span class="o">-</span><span class="mf">0.4769501</span>    <span class="o">-</span><span class="mf">0.3559720</span>   <span class="mf">0.041717828</span>    <span class="mf">0.06999287</span>
+ <span class="p">[</span><span class="mi">8</span><span class="p">,]</span>     <span class="mf">0.8321032</span>     <span class="mf">0.5432305</span>   <span class="mf">0.015287949</span>    <span class="mf">0.08079311</span>
+ <span class="p">[</span><span class="mi">9</span><span class="p">,]</span>    <span class="o">-</span><span class="mf">0.4626080</span>    <span class="o">-</span><span class="mf">0.3692359</span>   <span class="mf">0.089099718</span>    <span class="mf">0.05182974</span>
+<span class="p">[</span><span class="mi">10</span><span class="p">,]</span>     <span class="mf">0.5400462</span>     <span class="mf">0.5396841</span>  <span class="o">-</span><span class="mf">0.001916337</span>   <span class="o">-</span><span class="mf">0.03069186</span>
+<span class="p">[</span><span class="mi">11</span><span class="p">,]</span>    <span class="o">-</span><span class="mf">0.4607559</span>    <span class="o">-</span><span class="mf">0.3461168</span>   <span class="mf">0.041789698</span>    <span class="mf">0.06116461</span>
+<span class="p">[</span><span class="mi">12</span><span class="p">,]</span>     <span class="mf">0.7589304</span>     <span class="mf">0.5078718</span>   <span class="mf">0.008028795</span>    <span class="mf">0.07026631</span>
+<span class="p">[</span><span class="mi">13</span><span class="p">,]</span>    <span class="o">-</span><span class="mf">0.4446532</span>    <span class="o">-</span><span class="mf">0.3634106</span>   <span class="mf">0.081175576</span>    <span class="mf">0.03902433</span>
+<span class="p">[</span><span class="mi">14</span><span class="p">,]</span>     <span class="mf">0.5030049</span>     <span class="mf">0.5120928</span>  <span class="o">-</span><span class="mf">0.003504128</span>   <span class="o">-</span><span class="mf">0.02963862</span>
+<span class="p">[</span><span class="mi">15</span><span class="p">,]</span>    <span class="o">-</span><span class="mf">0.4451392</span>    <span class="o">-</span><span class="mf">0.3396895</span>   <span class="mf">0.037675321</span>    <span class="mf">0.05017871</span>
 </pre></div>
-
-<center>
-  <img src = "http://ubuntuone.com/7R7qs0RBe5uTVbzl42TiNn" alt = "STACF">
-</center>
 
 <div class="highlight highlight-coffee"><pre><span class="nx">stpacf</span><span class="p">(</span><span class="nv">data = </span><span class="nx">palay</span><span class="p">.</span><span class="nx">cen</span><span class="p">,</span> <span class="nv">wmatrices = </span><span class="nx">list</span><span class="p">(</span><span class="nx">NULL</span><span class="p">,</span> <span class="nx">W1</span><span class="p">,</span> <span class="nx">W2</span><span class="p">,</span> <span class="nx">W3</span><span class="p">))</span>
 </pre></div>
 
 <div class="highlight highlight-coffee"><pre>      <span class="nx">Spatial</span> <span class="nx">Lag</span> <span class="mi">0</span> <span class="nx">Spatial</span> <span class="nx">Lag</span> <span class="mi">1</span> <span class="nx">Spatial</span> <span class="nx">Lag</span> <span class="mi">2</span> <span class="nx">Spatial</span> <span class="nx">Lag</span> <span class="mi">3</span>
- <span class="p">[</span><span class="mi">1</span><span class="p">,]</span>   <span class="o">-</span><span class="mf">0.02823301</span>   <span class="mf">0.008987903</span>   <span class="mf">0.048705037</span>    <span class="mf">0.08933542</span>
- <span class="p">[</span><span class="mi">2</span><span class="p">,]</span>    <span class="mf">0.01063080</span>   <span class="mf">0.099286717</span>  <span class="o">-</span><span class="mf">0.051951462</span>    <span class="mf">0.17494632</span>
- <span class="p">[</span><span class="mi">3</span><span class="p">,]</span>   <span class="o">-</span><span class="mf">0.14065728</span>   <span class="mf">0.351446318</span>   <span class="mf">0.276767636</span>    <span class="mf">0.23116367</span>
- <span class="p">[</span><span class="mi">4</span><span class="p">,]</span>    <span class="mf">0.68905497</span>   <span class="mf">0.034597797</span>  <span class="o">-</span><span class="mf">0.022866365</span>   <span class="o">-</span><span class="mf">0.06517905</span>
- <span class="p">[</span><span class="mi">5</span><span class="p">,]</span>    <span class="mf">0.05070857</span>  <span class="o">-</span><span class="mf">0.160956454</span>  <span class="o">-</span><span class="mf">0.185543857</span>   <span class="o">-</span><span class="mf">0.14180284</span>
- <span class="p">[</span><span class="mi">6</span><span class="p">,]</span>    <span class="mf">0.10431058</span>  <span class="o">-</span><span class="mf">0.096330383</span>   <span class="mf">0.052963877</span>   <span class="o">-</span><span class="mf">0.13878771</span>
- <span class="p">[</span><span class="mi">7</span><span class="p">,]</span>    <span class="mf">0.05835590</span>  <span class="o">-</span><span class="mf">0.177429701</span>  <span class="o">-</span><span class="mf">0.030925573</span>   <span class="o">-</span><span class="mf">0.07256701</span>
- <span class="p">[</span><span class="mi">8</span><span class="p">,]</span>    <span class="mf">0.25931172</span>  <span class="o">-</span><span class="mf">0.076016943</span>  <span class="o">-</span><span class="mf">0.051641416</span>   <span class="o">-</span><span class="mf">0.03489123</span>
- <span class="p">[</span><span class="mi">9</span><span class="p">,]</span>    <span class="mf">0.13415305</span>  <span class="o">-</span><span class="mf">0.006276763</span>  <span class="o">-</span><span class="mf">0.007680231</span>   <span class="o">-</span><span class="mf">0.06852715</span>
-<span class="p">[</span><span class="mi">10</span><span class="p">,]</span>   <span class="o">-</span><span class="mf">0.03213706</span>  <span class="o">-</span><span class="mf">0.145538247</span>  <span class="o">-</span><span class="mf">0.076944680</span>   <span class="o">-</span><span class="mf">0.26853452</span>
-<span class="p">[</span><span class="mi">11</span><span class="p">,]</span>    <span class="mf">0.22032805</span>  <span class="o">-</span><span class="mf">0.134949490</span>  <span class="o">-</span><span class="mf">0.135539688</span>   <span class="o">-</span><span class="mf">0.06504067</span>
-<span class="p">[</span><span class="mi">12</span><span class="p">,]</span>    <span class="mf">0.07746315</span>  <span class="o">-</span><span class="mf">0.062477010</span>   <span class="mf">0.042674546</span>    <span class="mf">0.03834171</span>
-<span class="p">[</span><span class="mi">13</span><span class="p">,]</span>   <span class="o">-</span><span class="mf">0.05131963</span>   <span class="mf">0.014992002</span>   <span class="mf">0.035750675</span>    <span class="mf">0.03530259</span>
-<span class="p">[</span><span class="mi">14</span><span class="p">,]</span>    <span class="mf">0.02187674</span>   <span class="mf">0.078717882</span>   <span class="mf">0.012064031</span>    <span class="mf">0.18609974</span>
-<span class="p">[</span><span class="mi">15</span><span class="p">,]</span>   <span class="o">-</span><span class="mf">0.08605871</span>  <span class="o">-</span><span class="mf">0.071585168</span>  <span class="o">-</span><span class="mf">0.105247384</span>   <span class="o">-</span><span class="mf">0.13500443</span>
+ <span class="p">[</span><span class="mi">1</span><span class="p">,]</span>   <span class="o">-</span><span class="mf">0.14304647</span>   <span class="mf">0.511218868</span>    <span class="mf">0.55682738</span>    <span class="mf">0.19981610</span>
+ <span class="p">[</span><span class="mi">2</span><span class="p">,]</span>   <span class="o">-</span><span class="mf">0.25539678</span>   <span class="mf">0.473270591</span>    <span class="mf">0.14747855</span>    <span class="mf">0.10362970</span>
+ <span class="p">[</span><span class="mi">3</span><span class="p">,]</span>   <span class="o">-</span><span class="mf">0.10146576</span>   <span class="mf">0.359960022</span>   <span class="o">-</span><span class="mf">0.37010962</span>    <span class="mf">0.17611802</span>
+ <span class="p">[</span><span class="mi">4</span><span class="p">,]</span>    <span class="mf">0.38601724</span>   <span class="mf">0.035951653</span>    <span class="mf">0.06345174</span>    <span class="mf">0.11231104</span>
+ <span class="p">[</span><span class="mi">5</span><span class="p">,]</span>   <span class="o">-</span><span class="mf">0.07615717</span>  <span class="o">-</span><span class="mf">0.209693181</span>   <span class="o">-</span><span class="mf">0.09118031</span>   <span class="o">-</span><span class="mf">0.01877791</span>
+ <span class="p">[</span><span class="mi">6</span><span class="p">,]</span>    <span class="mf">0.25073879</span>  <span class="o">-</span><span class="mf">0.166778338</span>   <span class="o">-</span><span class="mf">0.03325437</span>   <span class="o">-</span><span class="mf">0.07793400</span>
+ <span class="p">[</span><span class="mi">7</span><span class="p">,]</span>    <span class="mf">0.08483755</span>  <span class="o">-</span><span class="mf">0.096729707</span>   <span class="o">-</span><span class="mf">0.05191220</span>   <span class="o">-</span><span class="mf">0.10225812</span>
+ <span class="p">[</span><span class="mi">8</span><span class="p">,]</span>    <span class="mf">0.20206063</span>   <span class="mf">0.005777546</span>   <span class="o">-</span><span class="mf">0.01424020</span>   <span class="o">-</span><span class="mf">0.03562691</span>
+ <span class="p">[</span><span class="mi">9</span><span class="p">,]</span>    <span class="mf">0.14492995</span>  <span class="o">-</span><span class="mf">0.285797604</span>   <span class="o">-</span><span class="mf">0.09654800</span>   <span class="o">-</span><span class="mf">0.09723394</span>
+<span class="p">[</span><span class="mi">10</span><span class="p">,]</span>    <span class="mf">0.18184525</span>  <span class="o">-</span><span class="mf">0.576182623</span>   <span class="o">-</span><span class="mf">0.13934442</span>   <span class="o">-</span><span class="mf">0.16191452</span>
+<span class="p">[</span><span class="mi">11</span><span class="p">,]</span>    <span class="mf">0.15801674</span>  <span class="o">-</span><span class="mf">0.074907370</span>    <span class="mf">0.09285817</span>   <span class="o">-</span><span class="mf">0.01390365</span>
+<span class="p">[</span><span class="mi">12</span><span class="p">,]</span>    <span class="mf">0.22796914</span>  <span class="o">-</span><span class="mf">0.048807113</span>   <span class="o">-</span><span class="mf">0.09257688</span>   <span class="o">-</span><span class="mf">0.04854238</span>
+<span class="p">[</span><span class="mi">13</span><span class="p">,]</span>    <span class="mf">0.12255899</span>  <span class="o">-</span><span class="mf">0.130296912</span>   <span class="o">-</span><span class="mf">0.17546381</span>   <span class="o">-</span><span class="mf">0.10870668</span>
+<span class="p">[</span><span class="mi">14</span><span class="p">,]</span>   <span class="o">-</span><span class="mf">0.05799165</span>   <span class="mf">0.313754236</span>    <span class="mf">0.06080497</span>    <span class="mf">0.07436464</span>
+<span class="p">[</span><span class="mi">15</span><span class="p">,]</span>   <span class="o">-</span><span class="mf">0.09576009</span>  <span class="o">-</span><span class="mf">0.238561758</span>    <span class="mf">0.13853781</span>   <span class="o">-</span><span class="mf">0.06222810</span>
 </pre></div>
 
-<center>
-  <img src = "http://ubuntuone.com/76vaf28tUczzbV8xdSrqlv" alt = "STPACF">
-</center>
-
-
-<p>Our findings is that, the STACF is not decaying both temporally and spatially, this is clearly due to the fact that the data is seasonal in nature. Hence, we need to take the first order seasonal differencing,</p>
+<p>The findings suggest that the STACF is decaying spatially but not temporally, this is clearly due to the fact that the data is seasonal in nature. Hence, we need to take the first order seasonal differencing,</p>
 
 <div class="highlight highlight-coffee"><pre><span class="nx">palay</span><span class="p">.</span><span class="nx">dif</span> <span class="o">&lt;-</span> <span class="nx">diff</span><span class="p">(</span><span class="nx">as</span><span class="p">.</span><span class="nx">ts</span><span class="p">(</span><span class="nx">palay</span><span class="p">.</span><span class="nx">cen</span><span class="p">),</span> <span class="nv">lag = </span><span class="mi">4</span><span class="p">)</span>
 </pre></div>
 
-<p>Then again, we compute the STACF and STPACF of the differenced series,</p>
+<p><code>lag=4</code> since the data is quarterly; then we compute again the STACF and STPACF for the differenced series,</p>
 
 <div class="highlight highlight-coffee"><pre><span class="nx">stacf</span><span class="p">(</span><span class="nx">palay</span><span class="p">.</span><span class="nx">dif</span><span class="p">,</span> <span class="nv">wmatrices = </span><span class="nx">list</span><span class="p">(</span><span class="nx">NULL</span><span class="p">,</span> <span class="nx">W1</span><span class="p">,</span> <span class="nx">W2</span><span class="p">,</span> <span class="nx">W3</span><span class="p">))</span>
 </pre></div>
 
 <div class="highlight highlight-coffee"><pre>      <span class="nx">Spatial</span> <span class="nx">Lag</span> <span class="mi">0</span> <span class="nx">Spatial</span> <span class="nx">Lag</span> <span class="mi">1</span> <span class="nx">Spatial</span> <span class="nx">Lag</span> <span class="mi">2</span> <span class="nx">Spatial</span> <span class="nx">Lag</span> <span class="mi">3</span>
- <span class="p">[</span><span class="mi">1</span><span class="p">,]</span>  <span class="o">-</span><span class="mf">0.102909427</span>   <span class="mf">0.083636900</span>  <span class="mf">0.0403073854</span>   <span class="mf">0.038179694</span>
- <span class="p">[</span><span class="mi">2</span><span class="p">,]</span>   <span class="mf">0.176881582</span>   <span class="mf">0.019438667</span> <span class="o">-</span><span class="mf">0.0070691863</span>   <span class="mf">0.146269081</span>
- <span class="p">[</span><span class="mi">3</span><span class="p">,]</span>   <span class="mf">0.042544299</span>   <span class="mf">0.042867035</span>  <span class="mf">0.0815154139</span>   <span class="mf">0.002562927</span>
- <span class="p">[</span><span class="mi">4</span><span class="p">,]</span>  <span class="o">-</span><span class="mf">0.175689995</span>   <span class="mf">0.035204383</span>  <span class="mf">0.0024019208</span>   <span class="mf">0.019544634</span>
- <span class="p">[</span><span class="mi">5</span><span class="p">,]</span>   <span class="mf">0.002817186</span>  <span class="o">-</span><span class="mf">0.034520667</span>  <span class="mf">0.0113699136</span>  <span class="o">-</span><span class="mf">0.019744074</span>
- <span class="p">[</span><span class="mi">6</span><span class="p">,]</span>   <span class="mf">0.075060958</span>   <span class="mf">0.044314185</span>  <span class="mf">0.0235801562</span>   <span class="mf">0.042948623</span>
- <span class="p">[</span><span class="mi">7</span><span class="p">,]</span>   <span class="mf">0.044036252</span>  <span class="o">-</span><span class="mf">0.012706278</span>  <span class="mf">0.0246460998</span>   <span class="mf">0.030246641</span>
- <span class="p">[</span><span class="mi">8</span><span class="p">,]</span>   <span class="mf">0.015816331</span>   <span class="mf">0.011759783</span> <span class="o">-</span><span class="mf">0.0194888502</span>   <span class="mf">0.031732636</span>
- <span class="p">[</span><span class="mi">9</span><span class="p">,]</span>   <span class="mf">0.030520792</span>   <span class="mf">0.046711630</span>  <span class="mf">0.0225484166</span>  <span class="o">-</span><span class="mf">0.009435525</span>
-<span class="p">[</span><span class="mi">10</span><span class="p">,]</span>  <span class="o">-</span><span class="mf">0.038435104</span>  <span class="o">-</span><span class="mf">0.044826092</span> <span class="o">-</span><span class="mf">0.0128675183</span>  <span class="o">-</span><span class="mf">0.114741210</span>
-<span class="p">[</span><span class="mi">11</span><span class="p">,]</span>  <span class="o">-</span><span class="mf">0.008104361</span>   <span class="mf">0.038418438</span> <span class="o">-</span><span class="mf">0.0087326643</span>   <span class="mf">0.085432297</span>
-<span class="p">[</span><span class="mi">12</span><span class="p">,]</span>   <span class="mf">0.002133791</span>  <span class="o">-</span><span class="mf">0.027393319</span> <span class="o">-</span><span class="mf">0.0001690071</span>  <span class="o">-</span><span class="mf">0.018246899</span>
-<span class="p">[</span><span class="mi">13</span><span class="p">,]</span>   <span class="mf">0.082231615</span>  <span class="o">-</span><span class="mf">0.017085358</span>  <span class="mf">0.0152890404</span>   <span class="mf">0.044731970</span>
-<span class="p">[</span><span class="mi">14</span><span class="p">,]</span>  <span class="o">-</span><span class="mf">0.015698510</span>   <span class="mf">0.060648279</span> <span class="o">-</span><span class="mf">0.0066032486</span>   <span class="mf">0.137841468</span>
-<span class="p">[</span><span class="mi">15</span><span class="p">,]</span>   <span class="mf">0.125114476</span>   <span class="mf">0.006045925</span>  <span class="mf">0.0082689696</span>   <span class="mf">0.010564056</span>
+ <span class="p">[</span><span class="mi">1</span><span class="p">,]</span>  <span class="o">-</span><span class="mf">0.102909427</span>   <span class="mf">0.025653689</span>   <span class="mf">0.082953522</span>  <span class="mf">0.0539520289</span>
+ <span class="p">[</span><span class="mi">2</span><span class="p">,]</span>   <span class="mf">0.176881582</span>   <span class="mf">0.117139152</span>   <span class="mf">0.013167676</span>  <span class="mf">0.0115715456</span>
+ <span class="p">[</span><span class="mi">3</span><span class="p">,]</span>   <span class="mf">0.042544299</span>   <span class="mf">0.039321092</span>   <span class="mf">0.007792355</span>  <span class="mf">0.0554658845</span>
+ <span class="p">[</span><span class="mi">4</span><span class="p">,]</span>  <span class="o">-</span><span class="mf">0.175689995</span>   <span class="mf">0.033860939</span>   <span class="mf">0.007619782</span>  <span class="mf">0.0068130653</span>
+ <span class="p">[</span><span class="mi">5</span><span class="p">,]</span>   <span class="mf">0.002817186</span>  <span class="o">-</span><span class="mf">0.028309614</span>  <span class="o">-</span><span class="mf">0.036774801</span>  <span class="mf">0.0259092901</span>
+ <span class="p">[</span><span class="mi">6</span><span class="p">,]</span>   <span class="mf">0.075060958</span>   <span class="mf">0.088457609</span>   <span class="mf">0.034410303</span>  <span class="mf">0.0135122268</span>
+ <span class="p">[</span><span class="mi">7</span><span class="p">,]</span>   <span class="mf">0.044036252</span>   <span class="mf">0.023091860</span>  <span class="o">-</span><span class="mf">0.024324734</span>  <span class="mf">0.0232175233</span>
+ <span class="p">[</span><span class="mi">8</span><span class="p">,]</span>   <span class="mf">0.015816331</span>   <span class="mf">0.004172408</span>   <span class="mf">0.043260335</span> <span class="o">-</span><span class="mf">0.0127784432</span>
+ <span class="p">[</span><span class="mi">9</span><span class="p">,]</span>   <span class="mf">0.030520792</span>   <span class="mf">0.013617616</span>   <span class="mf">0.028537045</span>  <span class="mf">0.0190366262</span>
+<span class="p">[</span><span class="mi">10</span><span class="p">,]</span>  <span class="o">-</span><span class="mf">0.038435104</span>  <span class="o">-</span><span class="mf">0.120098561</span>  <span class="o">-</span><span class="mf">0.044183399</span> <span class="o">-</span><span class="mf">0.0241420075</span>
+<span class="p">[</span><span class="mi">11</span><span class="p">,]</span>  <span class="o">-</span><span class="mf">0.008104361</span>   <span class="mf">0.061734994</span>   <span class="mf">0.053531660</span>  <span class="mf">0.0148140566</span>
+<span class="p">[</span><span class="mi">12</span><span class="p">,]</span>   <span class="mf">0.002133791</span>   <span class="mf">0.013137359</span>  <span class="o">-</span><span class="mf">0.054519301</span> <span class="o">-</span><span class="mf">0.0190006145</span>
+<span class="p">[</span><span class="mi">13</span><span class="p">,]</span>   <span class="mf">0.082231615</span>   <span class="mf">0.033276088</span>  <span class="o">-</span><span class="mf">0.005586549</span> <span class="o">-</span><span class="mf">0.0004980636</span>
+<span class="p">[</span><span class="mi">14</span><span class="p">,]</span>  <span class="o">-</span><span class="mf">0.015698510</span>   <span class="mf">0.161005222</span>   <span class="mf">0.004396902</span>  <span class="mf">0.0289685701</span>
+<span class="p">[</span><span class="mi">15</span><span class="p">,]</span>   <span class="mf">0.125114476</span>   <span class="mf">0.024381011</span>  <span class="o">-</span><span class="mf">0.010967296</span>  <span class="mf">0.0043345931</span>
 </pre></div>
-
-<center>
-  <img src = "http://ubuntuone.com/3qUitIzaKm8yOQdpx0yzPn" alt = "Differenced STACF">
-</center>
 
 <div class="highlight highlight-coffee"><pre><span class="nx">stpacf</span><span class="p">(</span><span class="nx">palay</span><span class="p">.</span><span class="nx">dif</span><span class="p">,</span> <span class="nv">wmatrices = </span><span class="nx">list</span><span class="p">(</span><span class="nx">NULL</span><span class="p">,</span> <span class="nx">W1</span><span class="p">,</span> <span class="nx">W2</span><span class="p">,</span> <span class="nx">W3</span><span class="p">))</span>
 </pre></div>
 
 <div class="highlight highlight-coffee"><pre>      <span class="nx">Spatial</span> <span class="nx">Lag</span> <span class="mi">0</span> <span class="nx">Spatial</span> <span class="nx">Lag</span> <span class="mi">1</span> <span class="nx">Spatial</span> <span class="nx">Lag</span> <span class="mi">2</span> <span class="nx">Spatial</span> <span class="nx">Lag</span> <span class="mi">3</span>
- <span class="p">[</span><span class="mi">1</span><span class="p">,]</span>  <span class="o">-</span><span class="mf">0.150438290</span>   <span class="mf">0.130191183</span>  <span class="mf">0.0727639969</span>   <span class="mf">0.025040763</span>
- <span class="p">[</span><span class="mi">2</span><span class="p">,]</span>   <span class="mf">0.276100508</span>   <span class="mf">0.010840470</span> <span class="o">-</span><span class="mf">0.0107277062</span>   <span class="mf">0.218479601</span>
- <span class="p">[</span><span class="mi">3</span><span class="p">,]</span>   <span class="mf">0.071812816</span>   <span class="mf">0.043719906</span>  <span class="mf">0.0885910791</span>   <span class="mf">0.124437319</span>
- <span class="p">[</span><span class="mi">4</span><span class="p">,]</span>  <span class="o">-</span><span class="mf">0.380765356</span>   <span class="mf">0.113546177</span>  <span class="mf">0.0569276624</span>  <span class="o">-</span><span class="mf">0.073881237</span>
- <span class="p">[</span><span class="mi">5</span><span class="p">,]</span>  <span class="o">-</span><span class="mf">0.187336651</span>   <span class="mf">0.043035716</span>  <span class="mf">0.0185478999</span>  <span class="o">-</span><span class="mf">0.121974999</span>
- <span class="p">[</span><span class="mi">6</span><span class="p">,]</span>   <span class="mf">0.196875298</span>   <span class="mf">0.003145077</span> <span class="o">-</span><span class="mf">0.0073741193</span>   <span class="mf">0.122545952</span>
- <span class="p">[</span><span class="mi">7</span><span class="p">,]</span>   <span class="mf">0.173496856</span>  <span class="o">-</span><span class="mf">0.021425821</span>  <span class="mf">0.0743013271</span>   <span class="mf">0.197169307</span>
- <span class="p">[</span><span class="mi">8</span><span class="p">,]</span>  <span class="o">-</span><span class="mf">0.124770328</span>   <span class="mf">0.051807844</span>  <span class="mf">0.0101648418</span>  <span class="o">-</span><span class="mf">0.009699618</span>
- <span class="p">[</span><span class="mi">9</span><span class="p">,]</span>  <span class="o">-</span><span class="mf">0.145140910</span>   <span class="mf">0.073959615</span>  <span class="mf">0.0111004890</span>  <span class="o">-</span><span class="mf">0.200308731</span>
-<span class="p">[</span><span class="mi">10</span><span class="p">,]</span>  <span class="o">-</span><span class="mf">0.006878031</span>  <span class="o">-</span><span class="mf">0.048200948</span> <span class="o">-</span><span class="mf">0.0279187819</span>  <span class="o">-</span><span class="mf">0.095309571</span>
-<span class="p">[</span><span class="mi">11</span><span class="p">,]</span>   <span class="mf">0.111126109</span>   <span class="mf">0.012750419</span>  <span class="mf">0.0048213805</span>   <span class="mf">0.205577261</span>
-<span class="p">[</span><span class="mi">12</span><span class="p">,]</span>   <span class="mf">0.025174935</span>  <span class="o">-</span><span class="mf">0.030838635</span> <span class="o">-</span><span class="mf">0.0003660701</span>   <span class="mf">0.075341756</span>
-<span class="p">[</span><span class="mi">13</span><span class="p">,]</span>  <span class="o">-</span><span class="mf">0.013472644</span>  <span class="o">-</span><span class="mf">0.011832161</span>  <span class="mf">0.0302311014</span>  <span class="o">-</span><span class="mf">0.088961689</span>
-<span class="p">[</span><span class="mi">14</span><span class="p">,]</span>  <span class="o">-</span><span class="mf">0.084545016</span>   <span class="mf">0.085280169</span> <span class="o">-</span><span class="mf">0.0197077865</span>   <span class="mf">0.058797824</span>
-<span class="p">[</span><span class="mi">15</span><span class="p">,]</span>   <span class="mf">0.082998896</span>   <span class="mf">0.051000150</span>  <span class="mf">0.0088268281</span>   <span class="mf">0.068168052</span>
+ <span class="p">[</span><span class="mi">1</span><span class="p">,]</span>  <span class="o">-</span><span class="mf">0.146421601</span>   <span class="mf">0.032487793</span>  <span class="mf">0.0853739625</span>   <span class="mf">0.088825947</span>
+ <span class="p">[</span><span class="mi">2</span><span class="p">,]</span>   <span class="mf">0.227574617</span>   <span class="mf">0.265251476</span>  <span class="mf">0.0086875911</span>   <span class="mf">0.022379860</span>
+ <span class="p">[</span><span class="mi">3</span><span class="p">,]</span>   <span class="mf">0.013884996</span>   <span class="mf">0.234501046</span>  <span class="mf">0.0017332333</span>   <span class="mf">0.087121251</span>
+ <span class="p">[</span><span class="mi">4</span><span class="p">,]</span>  <span class="o">-</span><span class="mf">0.374341579</span>  <span class="o">-</span><span class="mf">0.007449137</span>  <span class="mf">0.0367435307</span>   <span class="mf">0.055216997</span>
+ <span class="p">[</span><span class="mi">5</span><span class="p">,]</span>  <span class="o">-</span><span class="mf">0.148779101</span>  <span class="o">-</span><span class="mf">0.137998111</span>  <span class="mf">0.0327572108</span>   <span class="mf">0.064802169</span>
+ <span class="p">[</span><span class="mi">6</span><span class="p">,]</span>   <span class="mf">0.144623030</span>   <span class="mf">0.218952875</span> <span class="o">-</span><span class="mf">0.0008164024</span>   <span class="mf">0.030398092</span>
+ <span class="p">[</span><span class="mi">7</span><span class="p">,]</span>   <span class="mf">0.093971255</span>   <span class="mf">0.287856390</span> <span class="o">-</span><span class="mf">0.0136972967</span>   <span class="mf">0.045549415</span>
+ <span class="p">[</span><span class="mi">8</span><span class="p">,]</span>  <span class="o">-</span><span class="mf">0.148459047</span>   <span class="mf">0.003528043</span>  <span class="mf">0.0666503281</span>  <span class="o">-</span><span class="mf">0.009344122</span>
+ <span class="p">[</span><span class="mi">9</span><span class="p">,]</span>  <span class="o">-</span><span class="mf">0.110767128</span>  <span class="o">-</span><span class="mf">0.218838986</span>  <span class="mf">0.0363238989</span>   <span class="mf">0.029674330</span>
+<span class="p">[</span><span class="mi">10</span><span class="p">,]</span>  <span class="o">-</span><span class="mf">0.027504504</span>  <span class="o">-</span><span class="mf">0.071234693</span> <span class="o">-</span><span class="mf">0.0560620268</span>  <span class="o">-</span><span class="mf">0.020184495</span>
+<span class="p">[</span><span class="mi">11</span><span class="p">,]</span>   <span class="mf">0.041945574</span>   <span class="mf">0.265583483</span>  <span class="mf">0.0341692277</span>   <span class="mf">0.027824812</span>
+<span class="p">[</span><span class="mi">12</span><span class="p">,]</span>  <span class="o">-</span><span class="mf">0.006097138</span>   <span class="mf">0.095614525</span>  <span class="mf">0.0095997826</span>  <span class="o">-</span><span class="mf">0.039610927</span>
+<span class="p">[</span><span class="mi">13</span><span class="p">,]</span>   <span class="mf">0.022523005</span>  <span class="o">-</span><span class="mf">0.100266088</span> <span class="o">-</span><span class="mf">0.0116048518</span>  <span class="o">-</span><span class="mf">0.008237559</span>
+<span class="p">[</span><span class="mi">14</span><span class="p">,]</span>  <span class="o">-</span><span class="mf">0.094342410</span>   <span class="mf">0.199611218</span> <span class="o">-</span><span class="mf">0.0280317015</span>   <span class="mf">0.050161727</span>
+<span class="p">[</span><span class="mi">15</span><span class="p">,]</span>   <span class="mf">0.066798455</span>   <span class="mf">0.139086023</span>  <span class="mf">0.0203601170</span>   <span class="mf">0.003121897</span>
 </pre></div>
 
-<center>
-  <img src = "http://ubuntuone.com/79QMt0JIa7TNHAIT3vszLp" alt = "Differenced STPACF">
-</center>
-
-<p>The findings suggest that the space-time ACF decays both in time and space; and the space-time PACF is significant in time lag 2 and 4, at spatial lag 0. Our tentative model therefore, would either be Seasonal STARIMA$(2_0,0,0)(0,1,0)_4$ or Seasonal STARIMA$(4_0,0,0)(0,1,0)_4$.</p>
+<p>The space-time ACF decays both in time and space; and the space-time PACF is significant in time lag 2 and cuts off at spatial lag 1. This is characterized by the space-time AR factor. Hence, we can consider our tentative model to be Seasonal STARIMA$(2_1,0,0)(0,1,0)_4$.</p>
       </section>
       <footer>
-        <p>Project maintained by <a href="https://github.com/alstat">Al-Ahmadgaid Asaad</a></p>
+        <p>Project maintained by <a href="https://github.com/alstat">alstat</a></p>
         <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></small></p>
       </footer>
     </div>
