@@ -1,6 +1,20 @@
 <!doctype html>
 <html>
   <head>
+  <script src='http://cdn.mathjax.org/mathjax/latest/MathJax.js' type='text/javascript'>    
+    MathJax.Hub.Config({
+        HTML: ["input/TeX","output/HTML-CSS"],
+        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
+               equationNumbers: { autoNumber: "AMS" } },
+        extensions: ["tex2jax.js"],
+        jax: ["input/TeX","output/HTML-CSS"],
+        tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                   displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                   processEscapes: true },
+        "HTML-CSS": { availableFonts: ["TeX"],
+                      linebreaks: { automatic: true } }
+    });
+</script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>stcor: Correlograms of Space-Time ARIMA by alstat</title>
@@ -195,7 +209,7 @@
 <p>The space-time ACF decays both in time and space; and the space-time PACF is significant in time lag 2 and cuts off at spatial lag 1. This is characterized by the space-time AR factor. Hence, we can consider our tentative model to be Seasonal STARIMA$(2_1,0,0)(0,1,0)_4$.</p>
       </section>
       <footer>
-        <p>Project maintained by <a href="https://github.com/alstat">alstat</a></p>
+        <p>Project maintained by <a href="https://github.com/alstat">Al-Ahmadgaid Asaad</a></p>
         <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></small></p>
       </footer>
     </div>
