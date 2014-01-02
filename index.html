@@ -59,27 +59,26 @@
 
 <ol>
 <li>
-<code>stacf</code> - estimates the autocorrelation function of the space-time series.</li>
-</ol><div class="highlight highlight-coffee"><pre><span class="nx">stacf</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nv">max.timelag = </span><span class="mi">15</span><span class="p">,</span> <span class="nv">wmatrices = </span><span class="nx">list</span><span class="p">(</span><span class="nx">NULL</span><span class="p">,</span> <span class="p">...),</span> <span class="nv">conf.level = </span><span class="mf">0.95</span><span class="p">)</span>
+<p><code>stacf</code> - estimates the autocorrelation function of the space-time series.</p>
+
+<div class="highlight highlight-coffee"><pre><span class="nx">stacf</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nv">max.timelag = </span><span class="mi">15</span><span class="p">,</span> <span class="nv">wmatrices = </span><span class="nx">list</span><span class="p">(</span><span class="nx">NULL</span><span class="p">,</span> <span class="p">...),</span> <span class="nv">conf.level = </span><span class="mf">0.95</span><span class="p">)</span>
 </pre></div>
 
 <ul>
 <li>data - the space-time data;</li>
 <li>max.timelag - the maximum timelag of the STACF (default is set to 15);</li>
 <li>wmatrices - weights matrices of the space-time series for the spatial orders. The entries is enumerated in a <code>list</code> function, where the first entry <strong>NULL</strong> designates the spatial lag 0. Note that, <strong>NULL</strong> should not be omitted, otherwise, the function will treat the first weights matrix as entries for spatial lag 0. And the <code>conf.level</code> is the confidence level for significant spikes of the correlogram (default is set to 95%).</li>
-</ul><ol>
+</ul>
+</li>
+<li><p><code>stpacf</code> - estimates the partial autocorrelation function of the space-time series.</p></li>
 <li>
-<code>stpacf</code> - estimates the partial autocorrelation function of the space-time series.</li>
-<li>
-<p><code>stcenter</code> - centralizes the space-time data to its mean.</p>
-
-<hr>
-<h2>
+<code>stcenter</code> - centralizes the space-time data to its mean.</li>
+</ol><hr><h2>
 <a name="vignette" class="anchor" href="#vignette"><span class="octicon octicon-link"></span></a>Vignette</h2>
 
 <p>The package contains dataset named <code>palay</code> which is the volume of the rice production from the Cordillera Administrative Region (CAR) of the Philippines. Run <code>?palay</code> to get more details about the data. There are 6 regions in the dataset that can be assigned into the following weights matrices using the equal weighting of spatial order.</p>
-</li>
-</ol><ul>
+
+<ul>
 <li>First spatial order weights matrix</li>
 </ul><div class="highlight highlight-coffee"><pre><span class="nx">W1</span> <span class="o">&lt;-</span> <span class="nx">rbind</span><span class="p">(</span><span class="nx">c</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
             <span class="nx">c</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
