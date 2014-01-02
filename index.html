@@ -1,20 +1,6 @@
 <!doctype html>
 <html>
   <head>
-  <script src='http://cdn.mathjax.org/mathjax/latest/MathJax.js' type='text/javascript'>    
-    MathJax.Hub.Config({
-        HTML: ["input/TeX","output/HTML-CSS"],
-        TeX: { extensions: ["AMSmath.js","AMSsymbols.js"], 
-               equationNumbers: { autoNumber: "AMS" } },
-        extensions: ["tex2jax.js"],
-        jax: ["input/TeX","output/HTML-CSS"],
-        tex2jax: { inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-                   displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-                   processEscapes: true },
-        "HTML-CSS": { availableFonts: ["TeX"],
-                      linebreaks: { automatic: true } }
-    });
-</script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>stcor: Correlograms of Space-Time ARIMA by alstat</title>
@@ -56,24 +42,44 @@
         <h2>
 <a name="description" class="anchor" href="#description"><span class="octicon octicon-link"></span></a>Description</h2>
 
-<p>The <code>stcor</code> package provides functions for correlograms of the advanced time series model, the Space-Time Autoregressive Integrated Moving Average (STARIMA). These functions are the Space-Time Autocorrelation Function (<code>stacf</code>) and Space-Time Partial Autocorrelation Function (<code>stpacf</code>). Including function for centralizing (<code>stcenter</code>) the data to its mean.</p>
+<p>The <code>stcor</code> package provides functions for correlograms of the advanced time series model, the Space-Time Autoregressive Integrated Moving Average (STARIMA). These functions are the Space-Time Autocorrelation Function (<code>stacf</code>) and Space-Time Partial Autocorrelation Function (<code>stpacf</code>). Including function for centralizing (<code>stcenter</code>) the data to its mean. </p>
 
 <h2>
 <a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
 
-<p>This package is not yet on CRAN, and still under development on <strong>github</strong>. Run the following for latest development:</p>
+<p>This package is not yet on CRAN, and still under development on <strong>github</strong>. Run the following to install the latest development:</p>
 
 <div class="highlight highlight-coffee"><pre><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">require</span><span class="p">(</span><span class="s">"devtools"</span><span class="p">))</span>
   <span class="nx">install</span><span class="p">.</span><span class="nx">packages</span><span class="p">(</span><span class="s">"devtools"</span><span class="p">)</span>
 <span class="nx">devtools</span><span class="o">::</span><span class="nx">install_github</span><span class="p">(</span><span class="s">"stcor"</span><span class="p">,</span> <span class="s">"alstat"</span><span class="p">)</span>
 </pre></div>
 
-<hr><h2>
+<h2>
+<a name="functions" class="anchor" href="#functions"><span class="octicon octicon-link"></span></a>Functions</h2>
+
+<ol>
+<li>
+<code>stacf</code> - estimates the autocorrelation function of the space-time series.</li>
+</ol><div class="highlight highlight-coffee"><pre><span class="nx">stacf</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nv">max.timelag = </span><span class="mi">15</span><span class="p">,</span> <span class="nv">wmatrices = </span><span class="nx">list</span><span class="p">(</span><span class="nx">NULL</span><span class="p">,</span> <span class="p">...),</span> <span class="nv">conf.level = </span><span class="mf">0.95</span><span class="p">)</span>
+</pre></div>
+
+<ul>
+<li>data - the space-time data;</li>
+<li>max.timelag - the maximum timelag of the STACF (default is set to 15);</li>
+<li>wmatrices - weights matrices of the space-time series for the spatial orders. The entries is enumerated in a <code>list</code> function, where the first entry <strong>NULL</strong> designates the spatial lag 0. Note that, <strong>NULL</strong> should not be omitted, otherwise, the function will treat the first weights matrix as entries for spatial lag 0. And the <code>conf.level</code> is the confidence level for significant spikes of the correlogram (default is set to 95%).</li>
+</ul><ol>
+<li>
+<code>stpacf</code> - estimates the partial autocorrelation function of the space-time series.</li>
+<li>
+<p><code>stcenter</code> - centralizes the space-time data to its mean.</p>
+
+<hr>
+<h2>
 <a name="vignette" class="anchor" href="#vignette"><span class="octicon octicon-link"></span></a>Vignette</h2>
 
 <p>The package contains dataset named <code>palay</code> which is the volume of the rice production from the Cordillera Administrative Region (CAR) of the Philippines. Run <code>?palay</code> to get more details about the data. There are 6 regions in the dataset that can be assigned into the following weights matrices using the equal weighting of spatial order.</p>
-
-<ul>
+</li>
+</ol><ul>
 <li>First spatial order weights matrix</li>
 </ul><div class="highlight highlight-coffee"><pre><span class="nx">W1</span> <span class="o">&lt;-</span> <span class="nx">rbind</span><span class="p">(</span><span class="nx">c</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
             <span class="nx">c</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
@@ -136,8 +142,6 @@
 <span class="p">[</span><span class="mi">15</span><span class="p">,]</span>    <span class="o">-</span><span class="mf">0.4451392</span>    <span class="o">-</span><span class="mf">0.3396895</span>   <span class="mf">0.037675321</span>    <span class="mf">0.05017871</span>
 </pre></div>
 
-<center><img src = "http://ubuntuone.com/2TvDgTYaBRIlgMz8gVikt3" alt = "STACF Plot"></center>
-
 <div class="highlight highlight-coffee"><pre><span class="nx">stpacf</span><span class="p">(</span><span class="nv">data = </span><span class="nx">palay</span><span class="p">.</span><span class="nx">cen</span><span class="p">,</span> <span class="nv">wmatrices = </span><span class="nx">list</span><span class="p">(</span><span class="nx">NULL</span><span class="p">,</span> <span class="nx">W1</span><span class="p">,</span> <span class="nx">W2</span><span class="p">,</span> <span class="nx">W3</span><span class="p">))</span>
 </pre></div>
 
@@ -158,8 +162,6 @@
 <span class="p">[</span><span class="mi">14</span><span class="p">,]</span>   <span class="o">-</span><span class="mf">0.05799165</span>   <span class="mf">0.313754236</span>    <span class="mf">0.06080497</span>    <span class="mf">0.07436464</span>
 <span class="p">[</span><span class="mi">15</span><span class="p">,]</span>   <span class="o">-</span><span class="mf">0.09576009</span>  <span class="o">-</span><span class="mf">0.238561758</span>    <span class="mf">0.13853781</span>   <span class="o">-</span><span class="mf">0.06222810</span>
 </pre></div>
-
-<center><img src = "http://ubuntuone.com/39JmTRsb7knaznMeqKuVnd" alt = "STPACF Plot"></center>
 
 <p>The findings suggest that the STACF is decaying spatially but not temporally, this is clearly due to the fact that the data is seasonal in nature. Hence, we need to take the first order seasonal differencing,</p>
 
@@ -189,8 +191,6 @@
 <span class="p">[</span><span class="mi">15</span><span class="p">,]</span>   <span class="mf">0.125114476</span>   <span class="mf">0.024381011</span>  <span class="o">-</span><span class="mf">0.010967296</span>  <span class="mf">0.0043345931</span>
 </pre></div>
 
-<center><img src = "http://ubuntuone.com/1Rxzh9Rl1D4JmCXOAtmUR0" alt = "Differenced STACF Plot"></center>
-
 <div class="highlight highlight-coffee"><pre><span class="nx">stpacf</span><span class="p">(</span><span class="nx">palay</span><span class="p">.</span><span class="nx">dif</span><span class="p">,</span> <span class="nv">wmatrices = </span><span class="nx">list</span><span class="p">(</span><span class="nx">NULL</span><span class="p">,</span> <span class="nx">W1</span><span class="p">,</span> <span class="nx">W2</span><span class="p">,</span> <span class="nx">W3</span><span class="p">))</span>
 </pre></div>
 
@@ -212,12 +212,10 @@
 <span class="p">[</span><span class="mi">15</span><span class="p">,]</span>   <span class="mf">0.066798455</span>   <span class="mf">0.139086023</span>  <span class="mf">0.0203601170</span>   <span class="mf">0.003121897</span>
 </pre></div>
 
-<center><img src = "http://ubuntuone.com/1B5HlFTCOCrE0q2aYz3una" alt = "Differenced STPACF Plot"></center>
-
 <p>The space-time ACF decays both in time and space; and the space-time PACF is significant in time lag 2 and cuts off at spatial lag 1. This is characterized by the space-time AR factor. Hence, we can consider our tentative model to be Seasonal STARIMA$(2_1,0,0)(0,1,0)_4$.</p>
       </section>
       <footer>
-        <p>Project maintained by <a href="https://github.com/alstat">Al-Ahmadgaid Asaad</a></p>
+        <p>Project maintained by <a href="https://github.com/alstat">alstat</a></p>
         <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></small></p>
       </footer>
     </div>
