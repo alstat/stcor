@@ -214,8 +214,9 @@
 <span class="p">[</span><span class="mi">15</span><span class="p">,]</span>   <span class="o">-</span><span class="mf">0.09576009</span>  <span class="o">-</span><span class="mf">0.238561758</span>    <span class="mf">0.13853781</span>   <span class="o">-</span><span class="mf">0.06222810</span>
 </pre></div>
 
-<p><img src="http://ubuntuone.com/39JmTRsb7knaznMeqKuVnd" alt="Space-Time PACF Plot">
-The findings suggest that the STACF is decaying spatially but not temporally, this is clearly due to the fact that the data is seasonal in nature. Hence, we need to take the first order seasonal differencing,</p>
+<p><img src="http://ubuntuone.com/39JmTRsb7knaznMeqKuVnd" alt="Space-Time PACF Plot"></p>
+
+<p>The findings suggest that the STACF is decaying spatially but not temporally, this is clearly due to the fact that the data is seasonal in nature. Hence, we need to take the first order seasonal differencing,</p>
 
 <div class="highlight highlight-coffee"><pre><span class="nx">palay</span><span class="p">.</span><span class="nx">dif</span> <span class="o">&lt;-</span> <span class="nx">diff</span><span class="p">(</span><span class="nx">as</span><span class="p">.</span><span class="nx">ts</span><span class="p">(</span><span class="nx">palay</span><span class="p">.</span><span class="nx">cen</span><span class="p">),</span> <span class="nv">lag = </span><span class="mi">4</span><span class="p">)</span>
 </pre></div>
@@ -266,8 +267,9 @@ The findings suggest that the STACF is decaying spatially but not temporally, th
 <span class="p">[</span><span class="mi">15</span><span class="p">,]</span>   <span class="mf">0.066798455</span>   <span class="mf">0.139086023</span>  <span class="mf">0.0203601170</span>   <span class="mf">0.003121897</span>
 </pre></div>
 
-<p><img src="http://ubuntuone.com/1B5HlFTCOCrE0q2aYz3una" alt="Space-Time PACF Plot of the Differenced Series">
-The space-time ACF decays both in time and space; and the space-time PACF is significant in time lag 2 and cuts off at spatial lag 1. This is characterized by the space-time AR factor. Hence, we can consider our tentative model to be Seasonal STARIMA$(2_1,0,0)(0,1,0)_4$.</p>
+<p><img src="http://ubuntuone.com/1B5HlFTCOCrE0q2aYz3una" alt="Space-Time PACF Plot of the Differenced Series"></p>
+
+<p>The space-time ACF decays both in time and space; and the space-time PACF is significant in time lag 2 and cuts off at spatial lag 1. This is characterized by the space-time AR factor. Hence, we can consider our tentative model to be Seasonal STARIMA$(2_1,0,0)(0,1,0)_4$.</p>
       </section>
       <footer>
         <p>Project maintained by <a href="https://github.com/alstat">alstat</a></p>
