@@ -18,4 +18,4 @@ Al-Ahmadgaid Asaad (alstated@gmail.com)
 
 Note
 -----
-This project is underconstruction!
+This project is under development!
