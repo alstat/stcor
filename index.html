@@ -168,7 +168,7 @@
 <div class="highlight highlight-coffee"><pre><span class="nx">palay</span><span class="p">.</span><span class="nx">cen</span> <span class="o">&lt;-</span> <span class="nx">stcenter</span><span class="p">(</span><span class="nx">palay1</span><span class="p">)</span>
 </pre></div>
 
-<p>Finally, Compute the STACF and STPACF</p>
+<p>Finally, compute the STACF and STPACF</p>
 
 <div class="highlight highlight-coffee"><pre><span class="nx">stacf</span><span class="p">(</span><span class="nv">data = </span><span class="nx">palay</span><span class="p">.</span><span class="nx">cen</span><span class="p">,</span> <span class="nv">wmatrices = </span><span class="nx">list</span><span class="p">(</span><span class="nx">NULL</span><span class="p">,</span> <span class="nx">W1</span><span class="p">,</span> <span class="nx">W2</span><span class="p">,</span> <span class="nx">W3</span><span class="p">))</span>
 </pre></div>
@@ -216,7 +216,7 @@
 
 <p><img src="http://ubuntuone.com/39JmTRsb7knaznMeqKuVnd" alt="Space-Time PACF Plot"></p>
 
-<p>The findings suggest that the STACF is decaying spatially but not temporally, this is clearly due to the fact that the data is seasonal in nature. Hence, we need to take the first order seasonal differencing,</p>
+<p>The findings suggest that the STACF is decaying spatially but not temporally, and as observed, the spikes with high magnitude repeats every four lags, which is the seasonal lag since the data is quarterly. Hence, first order seasonal differencing is needed for transformation,</p>
 
 <div class="highlight highlight-coffee"><pre><span class="nx">palay</span><span class="p">.</span><span class="nx">dif</span> <span class="o">&lt;-</span> <span class="nx">diff</span><span class="p">(</span><span class="nx">as</span><span class="p">.</span><span class="nx">ts</span><span class="p">(</span><span class="nx">palay</span><span class="p">.</span><span class="nx">cen</span><span class="p">),</span> <span class="nv">lag = </span><span class="mi">4</span><span class="p">)</span>
 </pre></div>
