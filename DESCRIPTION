@@ -1,14 +1,19 @@
 Package: stcor
 Type: Package
 Title: Correlograms of Space-Time ARIMA
-Version: 0.6.2
-Date: 2013-12-25
-Authors@R: c(
-  person("Al-Ahmadgaid", "Asaad", email = "alstated@gmail.com", 
-    role = c("aut", "cre")
-  ))
+Version: 0.6.92
+Date: 2013-12-26
+Author: Al-Ahmadgaid Bahauddin Asaad <alstated@gmail.com>
 Maintainer: Al-Ahmadgaid Bahauddin Asaad <alstated@gmail.com>
-Description: Correlograms of Space-Time Autoregressive Integrated Moving Average
-License: GNU Affero General Public License
-Depends: Rcpp (>= 0.10.6)
+Description: A tool for identifying Space-Time ARIMA models using the
+    correlograms Space-Time Autocorrelation Function (STACF) and Partial
+    Autocorrelation Function (STPACF)
+License: GPL-2
+Depends:
+    Rcpp (>= 0.10.6)
+Imports:
+    reshape2,
+    ggplot2
+LazyData: true
 LinkingTo: Rcpp
+URL: http://alstat.github.io/stcor/
